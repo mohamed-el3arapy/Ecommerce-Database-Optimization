@@ -1,5 +1,6 @@
 EXPLAIN ANALYZE
-SELECT category_name AS Category, COUNT(product_id) AS Total_Products 
-FROM category 
-JOIN product ON category.category_id = product.category_id 
-GROUP BY category_name;
+SELECT c.customer_id, c.first_name, c.last_name, SUM(o.total_amount) AS Total_Spent 
+FROM customer c 
+JOIN orders o ON c.customer_id = o.customer_id 
+GROUP BY c.customer_id, c.first_name, c.last_name 
+ORDER BY Total_Spent DESC;
